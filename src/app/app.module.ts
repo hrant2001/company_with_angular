@@ -15,6 +15,7 @@ import { SearchInputComponent } from './components/search-input/search-input.com
 
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
+import { EmployeesTabsComponent } from './components/employees-tabs/employees-tabs.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SharedModule } from './shared/shared.module';
     HeaderComponent,
     ButtonComponent,
     GlobalTabsComponent,
-    SearchInputComponent
+    SearchInputComponent,
+    EmployeesTabsComponent
     ],
   imports: [
     BrowserModule,

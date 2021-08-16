@@ -11,9 +11,4 @@ export class GlobalTabsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  
-  toggleAdd() {
-    console.log("adding employee...")
-  }
 }

@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>{{data?.employeeId ? "Edit" : "Add"}} Employee</h1>
+<div mat-dialog-content>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input matInput [(ngModel)]="data.fname">
+                  </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput [(ngModel)]="data.lname">
+                  </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="fill">
+                    <mat-label>Birthday</mat-label>
+                    <input matInput [(ngModel)]="data.birthday">
+                  </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput [(ngModel)]="data.email">
+                  </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="fill">
+                    <mat-label>Position</mat-label>
+                    <input matInput [(ngModel)]="data.positionName">
+                  </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="fill">
+                    <mat-label>Department</mat-label>
+                    <input matInput [(ngModel)]="data.departmentName">
+                  </mat-form-field>
+            </div>
+        </div>
+    </div>  
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>

@@ -3,6 +3,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Employee } from '../../core/interfaces/employee';
 import { EmployeeService } from '../../core/services/employee.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { AddEditDialogComponent } from '../add-edit-dialog/add-edit-dialog.component';
 
 @Component({
   selector: 'app-employees',
@@ -14,15 +16,11 @@ export class EmployeesComponent implements OnInit {
 
   public displayedColumns: string[] = ["employeeNumber", "fname", "lname", "birthday", "email", "position", "department", "actions"];
   public employees: Employee[];
-  public editEmployee: Employee;
-  public deleteEmployee: Employee;
 
   public dataSource: any;
 
-  constructor(private employeeService: EmployeeService) {
+  constructor(private employeeService: EmployeeService, public dialog: MatDialog) {
     this.employees = [];
-    this.editEmployee = {} as Employee;
-    this.deleteEmployee = {} as Employee;
   }
 
   ngOnInit() {
@@ -42,64 +40,47 @@ export class EmployeesComponent implements OnInit {
     );
   }
 
-  // public onAddEmloyee(addForm: NgForm): void {
-  //   document.getElementById('add-employee-form').click();
-  //   this.employeeService.addEmployee(addForm.value).subscribe(
-  //     (response: Employee) => {
-  //       console.log(response);
-  //       this.getEmployees();
-  //       addForm.reset();
-  //     },
-  //     (error: HttpErrorResponse) => {
-  //       alert(error.message);
-  //       addForm.reset();
-  //     }
-  //   );
-  // }
+  public deleteEmployee(id: number) {
+    this.employeeService.deleteEmployee(id).subscribe(() => {
+      this.getEmployees();
+    });
+  }
 
-  // public onUpdateEmloyee(employee: Employee): void {
-  //   this.employeeService.updateEmployee(employee).subscribe(
-  //     (response: Employee) => {
-  //       console.log(response);
-  //       this.getEmployees();
-  //     },
-  //     (error: HttpErrorResponse) => {
-  //       alert(error.message);
-  //     }
-  //   );
-  // }
+  public addEditEmployee(selectedEmployee?: Employee): void {
+    console.log(selectedEmployee);
+    const dialogRef = this.dialog.open(AddEditDialogComponent, {
+      width: '610px',
+      height: '500px',
+      data: selectedEmployee ? selectedEmployee : {employeeId:0, fname:"", lname:"", birthday:"", email:"", positionId:0, positionName:"", departmentId:0, departmentName:""} 
+    });
 
-  // public onDeleteEmloyee(employeeId: number): void {
-  //   this.employeeService.deleteEmployee(employeeId).subscribe(
-  //     (response: void) => {
-  //       console.log(response);
-  //       this.getEmployees();
-  //     },
-  //     (error: HttpErrorResponse) => {
-  //       alert(error.message);
-  //     }
-  //   );
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+      if (result) {
+        if (result.employeeId) {
+          this.employeeService.updateEmployee(result).subscribe(
+            (response: Employee) => {
+              console.log("Updated successfully",response);
+              this.getEmployees();
+            }
+          );
+        }
+        else {
+          this.employeeService.addEmployee(result).subscribe(
+            (response: Employee) => {
+              console.log("Added successfully",response);
+              this.getEmployees();
+            }
+          );
+        }
+      }
 
-  // public onOpenModal(employee: Employee, mode: string): void {
-  //   const container = document.getElementById('emp-table');
-  //   const button = document.createElement('button');
-  //   button.type = 'button';
-  //   button.style.display = 'none';
-  //   button.setAttribute('data-toggle', 'modal');
-  //   if (mode === 'add') {
-  //     button.setAttribute('data-target', '#addEmployeeModal');
-  //   }
-  //   if (mode === 'edit') {
-  //     this.editEmployee = employee;
-  //     button.setAttribute('data-target', '#updateEmployeeModal');
-  //   }
-  //   if (mode === 'delete') {
-  //     this.deleteEmployee = employee;
-  //     button.setAttribute('data-target', '#deleteEmployeeModal');
-  //   }
-  //   container.appendChild(button);
-  //   button.click();
-  // }
+    });
+    
+  }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

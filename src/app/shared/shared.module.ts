@@ -9,8 +9,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
-const matModules = [MatTableModule, MatFormFieldModule, MatInputModule, MatIconModule, MatTabsModule, MatButtonModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule]
+
+const matModules = [MatTableModule, MatFormFieldModule, MatInputModule, MatIconModule, MatTabsModule, MatButtonModule, 
+  MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule]
 
 @NgModule({
   declarations: [],

@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Employee } from '../interfaces/employee';
 import { environment } from 'src/environments/environment';
+import { Position } from '../interfaces/position';
+import { Department } from '../interfaces/department';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +29,13 @@ export class EmployeeService {
 
   public deleteEmployee(id: number) : Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/employees/delete/${id}`);
+  }
+
+  public getPositions() : Observable<Position[]> {
+    return this.http.get<Position[]>(`${this.apiServerUrl}/positions`);
+  }
+
+  public getDepartments() : Observable<Department[]> {
+    return this.http.get<Department[]>(`${this.apiServerUrl}/departments`);
   }
 }

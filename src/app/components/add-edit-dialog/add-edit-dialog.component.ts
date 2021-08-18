@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Employee } from 'src/app/core/interfaces/employee';
-import {FormControl} from '@angular/forms';
-import {Observable, of} from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { Observable} from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Position } from 'src/app/core/interfaces/position';
 import { Department } from 'src/app/core/interfaces/department';
@@ -16,10 +16,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AddEditDialogComponent implements OnInit {
 
-  myControl = new FormControl();
+  controlPos = new FormControl();
+  controlDep = new FormControl();
   positions: string[];
-  departments: Department[];
+  departments: string[];
   filteredPositions!: Observable<string[]>;
+  filteredDepartments!: Observable<string[]>;
 
   constructor(
     public dialogRef: MatDialogRef<AddEditDialogComponent>,
@@ -36,17 +38,23 @@ export class AddEditDialogComponent implements OnInit {
     this.getPositions();
     this.getDepartments();
 
-    this.filteredPositions = this.myControl.valueChanges
+    this.filteredPositions = this.controlPos.valueChanges
     .pipe(
       startWith(''),
-      map(value => this._filter(value))
+      map(value => this._filterPos(value))
+    );
+
+    this.filteredDepartments = this.controlDep.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => this._filterDep(value))
     );
   }
 
   public getPositions() : void {
     this.employeeService.getPositions().subscribe(
       (response: Position[]) => {
-        this.positions = response.map(pn => pn.name);
+        this.positions = response.map(p => p.name);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -57,7 +65,7 @@ export class AddEditDialogComponent implements OnInit {
   public getDepartments() : void {
     this.employeeService.getDepartments().subscribe(
       (response: Department[]) => {
-        this.departments = response;
+        this.departments = response.map(d => d.name);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -65,9 +73,15 @@ export class AddEditDialogComponent implements OnInit {
     );
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  private _filterPos(value: string): string[] {
+    const filterPos = value.toLowerCase();
 
-    return this.positions.filter(option => option.toLowerCase().includes(filterValue));
+    return this.positions.filter(option => option.toLowerCase().includes(filterPos));
+  }
+
+  private _filterDep(value: string): string[] {
+    const filterDep = value.toLowerCase();
+
+    return this.departments.filter(option => option.toLowerCase().includes(filterDep));
   }
 }

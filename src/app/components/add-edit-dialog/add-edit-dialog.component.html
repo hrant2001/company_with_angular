@@ -36,10 +36,10 @@
             <div class="col">
                 <mat-form-field appearance="fill">
                     <mat-label>Position</mat-label>
-                    <input matInput [(ngModel)]="data.positionName" required [formControl]="myControl"
-                        [matAutocomplete]="auto">
+                    <input matInput [(ngModel)]="data.positionName" required [formControl]="controlPos"
+                        [matAutocomplete]="autoPos">
 
-                    <mat-autocomplete #auto="matAutocomplete">
+                    <mat-autocomplete #autoPos="matAutocomplete">
                         <mat-option *ngFor="let position of filteredPositions | async" [value]="position">
                             {{position}}
                         </mat-option>
@@ -49,7 +49,14 @@
             <div class="col">
                 <mat-form-field appearance="fill">
                     <mat-label>Department</mat-label>
-                    <input matInput [(ngModel)]="data.departmentName" required>
+                    <input matInput [(ngModel)]="data.departmentName" required [formControl]="controlDep"
+                        [matAutocomplete]="autoDep">
+
+                    <mat-autocomplete #autoDep="matAutocomplete">
+                        <mat-option *ngFor="let department of filteredDepartments | async" [value]="department">
+                            {{department}}
+                        </mat-option>
+                    </mat-autocomplete>
                 </mat-form-field>
             </div>
         </div>

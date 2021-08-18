@@ -10,7 +10,7 @@ import { EmployeesComponent } from './components/employees/employees.component';
 import { ButtonComponent } from './components/button/button.component';
 import { GlobalTabsComponent } from './components/global-tabs/global-tabs.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { EmployeesTabsComponent } from './components/employees-tabs/employees-tabs.component';
 import { AddEditDialogComponent } from './components/add-edit-dialog/add-edit-dialog.component';

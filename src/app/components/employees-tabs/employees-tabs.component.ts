@@ -11,8 +11,4 @@ export class EmployeesTabsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  toggleAdd() {
-    console.log("adding employee...")
-  }
 }

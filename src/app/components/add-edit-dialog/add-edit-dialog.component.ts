@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Employee } from 'src/app/core/interfaces/employee';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable} from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Position } from 'src/app/core/interfaces/position';
@@ -16,18 +16,25 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AddEditDialogComponent implements OnInit {
 
-  controlPos = new FormControl();
-  controlDep = new FormControl();
   positions: string[];
   departments: string[];
   filteredPositions!: Observable<string[]>;
   filteredDepartments!: Observable<string[]>;
+  dialogForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<AddEditDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Employee, private employeeService: EmployeeService) {
+    @Inject(MAT_DIALOG_DATA) public data: Employee, private employeeService: EmployeeService, private fb: FormBuilder) {
       this.positions = [];
       this.departments = [];
+      this.dialogForm = fb.group({
+        'fname':['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+        'lname':['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+        'birthday':['', Validators.required],
+        'email':['', [Validators.required, Validators.email, Validators.maxLength(255)]],
+        'positionName':['', Validators.required],
+        'departmentName':['', Validators.required]
+      })
     }
 
   onNoClick(): void {
@@ -37,14 +44,23 @@ export class AddEditDialogComponent implements OnInit {
   ngOnInit(): void {
     this.getPositions();
     this.getDepartments();
+    const formValue = {
+      fname: this.data.fname,
+      lname: this.data.lname,
+      birthday: this.data.birthday,
+      email: this.data.email,
+      positionName: this.data.positionName,
+      departmentName: this.data.departmentName
+    }
+    this.dialogForm.setValue(formValue);
 
-    this.filteredPositions = this.controlPos.valueChanges
+    this.filteredPositions = this.dialogForm.controls.positionName.valueChanges
     .pipe(
       startWith(''),
       map(value => this._filterPos(value))
     );
 
-    this.filteredDepartments = this.controlDep.valueChanges
+    this.filteredDepartments = this.dialogForm.controls.departmentName.valueChanges
     .pipe(
       startWith(''),
       map(value => this._filterDep(value))

@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Delete Employee</h1>
+<div mat-dialog-content>
+    <h3>Are you sure to delete the employee <strong>{{data.fname}} {{data.lname}}</strong> from <strong>{{data.departmentName}}</strong> department?</h3>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Delete</button>
+</div>

@@ -14,6 +14,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { EmployeesTabsComponent } from './components/employees-tabs/employees-tabs.component';
 import { AddEditDialogComponent } from './components/add-edit-dialog/add-edit-dialog.component';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
+import { RecordsTabsComponent } from './components/records-tabs/records-tabs.component';
+import { RecordsComponent } from './components/records/records.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { AddEditDialogComponent } from './components/add-edit-dialog/add-edit-di
     ButtonComponent,
     GlobalTabsComponent,
     EmployeesTabsComponent,
-    AddEditDialogComponent
+    AddEditDialogComponent,
+    DeleteDialogComponent,
+    RecordsTabsComponent,
+    RecordsComponent
     ],
   imports: [
     BrowserModule,

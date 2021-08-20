@@ -11,7 +11,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
-
 const matModules = [MatTableModule, MatFormFieldModule, MatInputModule, MatIconModule, MatTabsModule, MatButtonModule, 
   MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule]
 

@@ -1,18 +1,19 @@
 <h1 mat-dialog-title>{{data?.employeeId ? "Edit" : "Add"}} Employee</h1>
 <div mat-dialog-content>
-
+    <form [formGroup]="dialogForm">
     <div class="container">
         <div class="row">
             <div class="col">
                 <mat-form-field appearance="fill">
                     <mat-label>First Name</mat-label>
-                    <input matInput [(ngModel)]="data.fname" required>
+                    <input matInput formControlName="fname">
+                    <!-- <mat-error *ngIf="dialogForm.get('fname').hasError('pattern')">Enter only letters</mat-error> -->
                 </mat-form-field>
             </div>
             <div class="col">
                 <mat-form-field appearance="fill">
                     <mat-label>Last Name</mat-label>
-                    <input matInput [(ngModel)]="data.lname" required>
+                    <input matInput formControlName="lname">
                 </mat-form-field>
             </div>
         </div>
@@ -20,7 +21,7 @@
             <div class="col">
                 <mat-form-field appearance="fill">
                     <mat-label>Birthday</mat-label>
-                    <input matInput [(ngModel)]="data.birthday" [matDatepicker]="picker" required>
+                    <input matInput formControlName="birthday" [matDatepicker]="picker">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -28,7 +29,7 @@
             <div class="col">
                 <mat-form-field appearance="fill">
                     <mat-label>Email</mat-label>
-                    <input matInput [(ngModel)]="data.email" required>
+                    <input matInput formControlName="email">
                 </mat-form-field>
             </div>
         </div>
@@ -36,8 +37,7 @@
             <div class="col">
                 <mat-form-field appearance="fill">
                     <mat-label>Position</mat-label>
-                    <input matInput [(ngModel)]="data.positionName" required [formControl]="controlPos"
-                        [matAutocomplete]="autoPos">
+                    <input matInput formControlName="positionName" [matAutocomplete]="autoPos">
 
                     <mat-autocomplete #autoPos="matAutocomplete">
                         <mat-option *ngFor="let position of filteredPositions | async" [value]="position">
@@ -49,7 +49,7 @@
             <div class="col">
                 <mat-form-field appearance="fill">
                     <mat-label>Department</mat-label>
-                    <input matInput [(ngModel)]="data.departmentName" required [formControl]="controlDep"
+                    <input matInput formControlName="departmentName"
                         [matAutocomplete]="autoDep">
 
                     <mat-autocomplete #autoDep="matAutocomplete">
@@ -61,6 +61,7 @@
             </div>
         </div>
     </div>
+</form>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>

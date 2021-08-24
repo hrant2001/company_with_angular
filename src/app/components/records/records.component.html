@@ -30,7 +30,7 @@
 
     <ng-container matColumnDef="employeeFullName">
         <th mat-header-cell *matHeaderCellDef> Employee Full Name </th>
-        <td mat-cell *matCellDef="let record"> {{record.employeeFullName}} </td>
+        <td mat-cell *matCellDef="let record"> {{record.employee.fname}} {{record.employee.lname}}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

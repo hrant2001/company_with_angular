@@ -1,7 +1,9 @@
+import { Employee } from "./employee";
+
 export interface Record {
     recordId: number;
     entranceTime: Date;
     exitTime: Date;
-    employeeId: number;
+    employee: Employee;
     employeeFullName: string;
 }

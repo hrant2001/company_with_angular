@@ -63,12 +63,13 @@ export class EmployeesComponent implements OnInit {
   }
 
   public addEditEmployee(selectedEmployee?: Employee): void {
-    console.log(selectedEmployee);
+    console.log('in addedit', selectedEmployee);
     const emp = { ...selectedEmployee };
     const dialogRef = this.dialog.open(AddEditDialogComponent, {
       width: '650px',
       height: '400px',
-      data: selectedEmployee ? emp : { employeeId: 0, fname: "", lname: "", birthday: "", email: "", positionId: 0, positionName: "", departmentId: 0, departmentName: "" }
+      data: selectedEmployee ? emp : { employeeId: 0, fname: '', lname: '', birthday: '', email: '',  
+      position: {positionId: 0, name: '', shortName:''}, department: {departmentId: 0, name: ''}, enabled:true}
     });
 
     dialogRef.afterClosed().subscribe(result => {

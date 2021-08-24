@@ -16,8 +16,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AddEditDialogComponent implements OnInit {
 
-  positions: string[];
-  departments: string[];
+  positions: Map<string,number>;
+  departments:Map<string,number>;
   filteredPositions!: Observable<string[]>;
   filteredDepartments!: Observable<string[]>;
   dialogForm: FormGroup;
@@ -25,8 +25,8 @@ export class AddEditDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Employee, private employeeService: EmployeeService, private fb: FormBuilder) {
-      this.positions = [];
-      this.departments = [];
+      this.positions = {} as Map<string,number>;
+      this.departments = {} as Map<string,number>;
       this.dialogForm = fb.group({
         'fname':['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
         'lname':['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
@@ -37,20 +37,27 @@ export class AddEditDialogComponent implements OnInit {
       })
     }
 
-  onNoClick(): void {
+    close(): void {
     this.dialogRef.close();
-  }
+    }
+
+    save(): void {
+      this.dialogForm.value.employeeId = this.data.employeeId;
+      this.dialogForm.value.position = {positionId : this.positions.get(this.dialogForm.value.positionName), name: this.dialogForm.value.positionName, shortName: ''}
+      this.dialogForm.value.department = {departmentId : this.departments.get(this.dialogForm.value.departmentName), name: this.dialogForm.value.departmentName}
+      this.dialogRef.close(this.dialogForm.value);
+    }
 
   ngOnInit(): void {
-    this.getPositions();
-    this.getDepartments();
+    this.positions = this.getPositions();    
+    this.departments = this.getDepartments();
     const formValue = {
       fname: this.data.fname,
       lname: this.data.lname,
       birthday: this.data.birthday,
       email: this.data.email,
-      positionName: this.data.positionName,
-      departmentName: this.data.departmentName
+      positionName: this.data.position.name,
+      departmentName: this.data.department.name
     }
     this.dialogForm.setValue(formValue);
 
@@ -67,37 +74,45 @@ export class AddEditDialogComponent implements OnInit {
     );
   }
 
-  public getPositions() : void {
+  public getPositions(): Map<string, number> {
+    let temp = new Map();
     this.employeeService.getPositions().subscribe(
       (response: Position[]) => {
-        this.positions = response.map(p => p.name);
+        response.forEach(n => {
+        temp.set(n.name, n.positionId);
+        })
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
+    return temp;
   }
 
-  public getDepartments() : void {
+  public getDepartments(): Map<string, number> {
+    let temp = new Map();
     this.employeeService.getDepartments().subscribe(
       (response: Department[]) => {
-        this.departments = response.map(d => d.name);
+        response.forEach(n => {
+          temp.set(n.name, n.departmentId);
+          })
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
+    return temp;
   }
 
   private _filterPos(value: string): string[] {
     const filterPos = value.toLowerCase();
 
-    return this.positions.filter(option => option.toLowerCase().includes(filterPos));
+    return Array.from(this.positions.keys()).filter(option => option.toLowerCase().includes(filterPos));
   }
 
   private _filterDep(value: string): string[] {
     const filterDep = value.toLowerCase();
-
-    return this.departments.filter(option => option.toLowerCase().includes(filterDep));
+    
+    return Array.from(this.departments.keys()).filter(option => option.toLowerCase().includes(filterDep));
   }
 }

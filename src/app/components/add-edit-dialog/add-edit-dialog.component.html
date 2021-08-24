@@ -5,22 +5,26 @@
         <div class="row">
             <div class="col">
                 <mat-form-field appearance="fill">
-                    <mat-label>First Name</mat-label>
+                    <mat-label>First Name*</mat-label>
                     <input matInput formControlName="fname">
-                    <!-- <mat-error *ngIf="dialogForm.get('fname').hasError('pattern')">Enter only letters</mat-error> -->
+                    <mat-error *ngIf="dialogForm.get('fname')?.hasError('pattern')">Enter only letters</mat-error>
+                    <mat-error *ngIf="dialogForm.get('fname')?.hasError('required')">Enter the first name</mat-error>
                 </mat-form-field>
             </div>
             <div class="col">
                 <mat-form-field appearance="fill">
-                    <mat-label>Last Name</mat-label>
+                    <mat-label>Last Name*</mat-label>
                     <input matInput formControlName="lname">
+                    <mat-error *ngIf="dialogForm.get('lname')?.hasError('pattern')">Enter only letters</mat-error>
+                    <mat-error *ngIf="dialogForm.get('lname')?.hasError('required')">Enter the last name</mat-error>
                 </mat-form-field>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <mat-form-field appearance="fill">
-                    <mat-label>Birthday</mat-label>
+                    <mat-label>Birthday*</mat-label>
+                    <mat-error *ngIf="dialogForm.get('birthday')?.hasError('required')">Enter the birthday</mat-error>
                     <input matInput formControlName="birthday" [matDatepicker]="picker">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -28,7 +32,8 @@
             </div>
             <div class="col">
                 <mat-form-field appearance="fill">
-                    <mat-label>Email</mat-label>
+                    <mat-label>Email*</mat-label>
+                    <mat-error *ngIf="dialogForm.get('email')?.hasError('required')">Enter the email</mat-error>
                     <input matInput formControlName="email">
                 </mat-form-field>
             </div>
@@ -36,9 +41,9 @@
         <div class="row">
             <div class="col">
                 <mat-form-field appearance="fill">
-                    <mat-label>Position</mat-label>
+                    <mat-label>Position*</mat-label>
                     <input matInput formControlName="positionName" [matAutocomplete]="autoPos">
-
+                    <mat-error *ngIf="dialogForm.get('positionName')?.hasError('required')">Enter the position</mat-error>
                     <mat-autocomplete #autoPos="matAutocomplete">
                         <mat-option *ngFor="let position of filteredPositions | async" [value]="position">
                             {{position}}
@@ -48,10 +53,9 @@
             </div>
             <div class="col">
                 <mat-form-field appearance="fill">
-                    <mat-label>Department</mat-label>
-                    <input matInput formControlName="departmentName"
-                        [matAutocomplete]="autoDep">
-
+                    <mat-label>Department*</mat-label>
+                    <input matInput formControlName="departmentName" [matAutocomplete]="autoDep">
+                    <mat-error *ngIf="dialogForm.get('departmentName')?.hasError('required')">Enter the department</mat-error>
                     <mat-autocomplete #autoDep="matAutocomplete">
                         <mat-option *ngFor="let department of filteredDepartments | async" [value]="department">
                             {{department}}
@@ -65,5 +69,5 @@
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="close()">Cancel</button>
-    <button mat-button [mat-dialog-close]="data" (click)="save()">Save</button>
+    <button mat-button [mat-dialog-close]="data" (click)="save()" [disabled]="!dialogForm.valid">Save</button>
 </div>

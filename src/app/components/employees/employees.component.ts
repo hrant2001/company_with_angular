@@ -75,7 +75,6 @@ export class EmployeesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The edit add dialog was closed', result);
       if (result) {
-        if (1) { //change !result.hasError('required')??
           if (result.employeeId) {
             this.employeeService.updateEmployee(result).subscribe(
               (response: Employee) => {
@@ -93,7 +92,6 @@ export class EmployeesComponent implements OnInit {
             );
           }
         }
-      }
     });
   }
 

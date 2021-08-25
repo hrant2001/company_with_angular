@@ -11,7 +11,7 @@ import { RecordService } from 'src/app/core/services/record.service';
 })
 export class RecordsComponent implements OnInit {
 
-  public displayedColumns: string[] = ["recordNumber", "entranceTime", "exitTime", "employeeFullName"];
+  public displayedColumns: string[] = ["recordNumber", "entranceTime", "exitTime", "employeeFullName", "department"];
   public records: Record[];
 
   public filter: string;

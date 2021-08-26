@@ -22,7 +22,7 @@
   <ng-container matColumnDef="employeeNumber">
     <th mat-header-cell *matHeaderCellDef> No. </th>
     <td mat-cell *matCellDef="let employee; let i = index"> 
-      <ng-container  *ngIf="employee.enabled == true">
+      <ng-container *ngIf="employee.enabled">
         {{i + 1}} 
       </ng-container>
     </td>
@@ -31,7 +31,7 @@
   <ng-container matColumnDef="fname">
     <th mat-header-cell *matHeaderCellDef> First Name </th>
     <td mat-cell *matCellDef="let employee"> 
-      <ng-container  *ngIf="employee.enabled == true">
+      <ng-container *ngIf="employee.enabled">
         {{employee.fname}} 
       </ng-container>
     </td>
@@ -40,7 +40,7 @@
   <ng-container matColumnDef="lname">
     <th mat-header-cell *matHeaderCellDef> Last Name </th>
     <td mat-cell *matCellDef="let employee"> 
-      <ng-container  *ngIf="employee.enabled == true">
+      <ng-container *ngIf="employee.enabled">
         {{employee.lname}}
       </ng-container>
     </td>
@@ -49,7 +49,7 @@
   <ng-container matColumnDef="birthday">
     <th mat-header-cell *matHeaderCellDef> Birthday </th>
     <td mat-cell *matCellDef="let employee"> 
-      <ng-container  *ngIf="employee.enabled == true">
+      <ng-container *ngIf="employee.enabled">
         {{employee.birthday | date:'yyyy-MM-dd'}} 
       </ng-container>
     </td>
@@ -58,7 +58,7 @@
   <ng-container matColumnDef="email">
     <th mat-header-cell *matHeaderCellDef> Email </th>
     <td mat-cell *matCellDef="let employee">
-      <ng-container  *ngIf="employee.enabled == true">
+      <ng-container *ngIf="employee.enabled">
         {{employee.email}}  
       </ng-container>
     </td>
@@ -67,7 +67,7 @@
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef> Position </th>
     <td mat-cell *matCellDef="let employee">
-      <ng-container  *ngIf="employee.enabled == true">
+      <ng-container *ngIf="employee.enabled">
         {{employee.position.name}}
       </ng-container>
     </td>
@@ -76,7 +76,7 @@
   <ng-container matColumnDef="department">
     <th mat-header-cell *matHeaderCellDef> Department </th>
     <td mat-cell *matCellDef="let employee">
-      <ng-container  *ngIf="employee.enabled == true">
+      <ng-container *ngIf="employee.enabled">
         {{employee.department.name}}
       </ng-container>
     </td>

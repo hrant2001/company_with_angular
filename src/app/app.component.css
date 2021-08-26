@@ -1,0 +1,4 @@
+::ng-deep .mat-tab-label-active {
+    background-color: #dadada;
+    font-weight: 700;
+  }

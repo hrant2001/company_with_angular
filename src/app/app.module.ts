@@ -29,7 +29,7 @@ import { RecordsComponent } from './components/records/records.component';
     DeleteDialogComponent,
     RecordsTabsComponent,
     RecordsComponent
-    ],
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

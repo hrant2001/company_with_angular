@@ -8,6 +8,7 @@ import { Position } from 'src/app/core/interfaces/position';
 import { Department } from 'src/app/core/interfaces/department';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-edit-dialog',
@@ -15,6 +16,10 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./add-edit-dialog.component.css']
 })
 export class AddEditDialogComponent implements OnInit {
+
+  minDate = new Date(1970.0,1) ;
+  maxDate = moment(new Date()).add(90,'days').toDate();
+  picker = new Date();
 
   positions: Map<string,number>;
   departments:Map<string,number>;
@@ -60,7 +65,11 @@ export class AddEditDialogComponent implements OnInit {
       departmentName: this.data.department.name
     }
     this.dialogForm.setValue(formValue);
-
+    this.dialogForm.controls.birthday.valueChanges.subscribe((value) => {
+      if (value) {
+        this.dialogForm.controls.birthday.patchValue(moment(value).format('YYYY-MM-DD'))
+      }
+    })
     this.filteredPositions = this.dialogForm.controls.positionName.valueChanges
     .pipe(
       startWith(''),

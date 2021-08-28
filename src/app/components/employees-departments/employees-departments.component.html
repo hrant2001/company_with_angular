@@ -1,12 +1,18 @@
+<h3><a href="#" (click)="exportexcel()" style="float: right; margin-top: 10px;">Get the Excel version</a></h3>
 <div class="container">
-    <h3><a href= "alo" style="float: right; margin-top: 10px;">Get the Excel version</a></h3>
-    <div *ngFor="let employee of employees; let i = index">
-        <div *ngIf="i == 0 || employees[i].department.name != employees[i - 1].department.name">
-            <h3><strong>{{employee.department.name}} department</strong></h3>
+    <table id="deps" >
+        <div *ngFor="let employee of employees; let i = index">
+            <tr *ngIf="i == 0 || employees[i].department.name != employees[i - 1].department.name">       
+                <td><strong> {{employee.department.name}} department </strong></td>
+            </tr>
+            <tr>
+                <td> {{ employee.lname }} </td>
+                <td> {{ employee.fname }} </td>
+                <td> {{ employee.birthday }} </td>
+                <td> {{ employee.email }} </td>
+                <td> {{ employee.position.name }} </td>
+            </tr>
             <br>
         </div>
-        <h4>{{employee.lname}} {{employee.fname}} {{employee.birthday}} {{employee.email}} {{employee.position.name}}</h4>
-        <br>
-    </div>
+    </table>
 </div>
-

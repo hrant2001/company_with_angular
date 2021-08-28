@@ -17,6 +17,7 @@ import { AddEditDialogComponent } from './components/add-edit-dialog/add-edit-di
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { RecordsTabsComponent } from './components/records-tabs/records-tabs.component';
 import { RecordsComponent } from './components/records/records.component';
+import { EmployeesDepartmentsComponent } from './components/employees-departments/employees-departments.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { RecordsComponent } from './components/records/records.component';
     AddEditDialogComponent,
     DeleteDialogComponent,
     RecordsTabsComponent,
-    RecordsComponent
+    RecordsComponent,
+    EmployeesDepartmentsComponent
   ],
   imports: [
     BrowserModule,

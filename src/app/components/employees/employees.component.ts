@@ -26,7 +26,7 @@ export class EmployeesComponent implements OnInit {
     this.filter = '';
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getEmployees();
   }
 

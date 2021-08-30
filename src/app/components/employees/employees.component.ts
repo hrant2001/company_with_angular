@@ -56,6 +56,14 @@ export class EmployeesComponent implements OnInit {
         this.employeeService.deleteEmployee(emp.employeeId).subscribe(() => {
           console.log("Deleted successfully");
           this.getEmployees();
+        },
+        (error: HttpErrorResponse) => {
+          if (error.status == 404) {
+            alert("The employee was not found to be deleted")
+          }
+          else {
+            alert("Something went wrong with the server");
+          }
         }
         );
       }
@@ -80,6 +88,17 @@ export class EmployeesComponent implements OnInit {
               (response: Employee) => {
                 console.log("Updated successfully", response);
                 this.getEmployees();
+              },
+              (error: HttpErrorResponse) => {
+                if (error.status == 400) {
+                  alert("The employee is not valid");
+                }
+                else if (error.status == 404) {
+                  alert("The employee was not found to be updated");
+                }
+                else {
+                  alert("Something went wrong with the server");
+                }
               }
             );
           }
@@ -88,6 +107,14 @@ export class EmployeesComponent implements OnInit {
               (response: Employee) => {
                 console.log("Added successfully", response);
                 this.getEmployees();
+              },
+              (error: HttpErrorResponse) => {
+                if (error.status == 400) {
+                  alert("The employee is already in the list");
+                }
+                else {
+                  alert("Something went wrong with the server");
+                }
               }
             );
           }

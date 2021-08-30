@@ -10,9 +10,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 const matModules = [MatTableModule, MatFormFieldModule, MatInputModule, MatIconModule, MatTabsModule, MatButtonModule, 
-  MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule]
+  MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule, MatButtonToggleModule]
 
 @NgModule({
   declarations: [],

@@ -47,4 +47,15 @@ export class RecordsComponent implements OnInit {
     this.dataSource.filter = '';
     this.filter = '';
   }
+
+  public showDay() {
+    const fromDay = document.createElement('input');
+    const toDay = document.createElement('input');
+    fromDay.type = 'date';
+    toDay.type = 'date';
+  }
+
+  public showMonth() {
+    
+  }
 }

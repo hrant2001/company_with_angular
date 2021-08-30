@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { from } from 'rxjs';
 import { Record } from 'src/app/core/interfaces/record';
 import { RecordService } from 'src/app/core/services/record.service';
 
@@ -15,12 +16,14 @@ export class RecordsComponent implements OnInit {
   public records: Record[];
 
   public filter: string;
+  public addedDays: boolean = false;
+  public addedMonths: boolean = false;
 
   public dataSource: any;
   constructor(private recordService: RecordService) {
     this.records = [];
     this.filter = '';
-   }
+  }
 
   ngOnInit(): void {
     this.getRecords();
@@ -49,13 +52,48 @@ export class RecordsComponent implements OnInit {
   }
 
   public showDay() {
-    const fromDay = document.createElement('input');
-    const toDay = document.createElement('input');
-    fromDay.type = 'date';
-    toDay.type = 'date';
+    if (!this.addedDays) {
+      const fromDay = document.createElement('input');
+      fromDay.type = 'number';
+      fromDay.setAttribute("min", "1");
+      fromDay.setAttribute("max", "31");
+
+      const toDay = document.createElement('input');
+      toDay.type = 'number';
+      toDay.setAttribute("min", "1");
+      toDay.setAttribute("max", "31");
+
+      const br = document.createElement("br");
+      const dayDiv = document.getElementById("dayDiv");
+
+      dayDiv?.append(fromDay);
+      dayDiv?.append(br);
+      dayDiv?.append(toDay);
+
+      this.addedDays = true;
+    }
   }
 
   public showMonth() {
-    
+    if (!this.addedMonths) {
+      const fromMonth = document.createElement('input');
+      fromMonth.type = 'month';
+
+      const toMonth = document.createElement('input');
+      toMonth.type = 'month';
+
+      const br = document.createElement("br");
+      const monthDiv = document.getElementById("monthDiv");
+
+      monthDiv?.append(fromMonth);
+      monthDiv?.append(br);
+      monthDiv?.append(toMonth);
+
+      this.addedMonths = true;
+    }
+  }
+
+  public search() {
+
   }
 }

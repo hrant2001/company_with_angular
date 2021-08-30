@@ -8,7 +8,7 @@
                     <mat-label>First Name*</mat-label>
                     <input matInput formControlName="fname">
                     <mat-error *ngIf="dialogForm.get('fname')?.hasError('pattern')">Enter only letters</mat-error>
-                    <mat-error *ngIf="dialogForm.get('fname')?.hasError('required')">Enter the first name</mat-error>
+                    <mat-error *ngIf="dialogForm.get('fname')?.hasError('required')">First name is mandatory</mat-error>
                 </mat-form-field>
             </div>
             <div class="col">
@@ -16,7 +16,7 @@
                     <mat-label>Last Name*</mat-label>
                     <input matInput formControlName="lname">
                     <mat-error *ngIf="dialogForm.get('lname')?.hasError('pattern')">Enter only letters</mat-error>
-                    <mat-error *ngIf="dialogForm.get('lname')?.hasError('required')">Enter the last name</mat-error>
+                    <mat-error *ngIf="dialogForm.get('lname')?.hasError('required')">Last name is mandatory</mat-error>
                 </mat-form-field>
             </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="col">
                 <mat-form-field appearance="fill">
                     <mat-label>Birthday*</mat-label>
-                    <mat-error *ngIf="dialogForm.get('birthday')?.hasError('required')">Enter the birthday</mat-error>
+                    <mat-error *ngIf="dialogForm.get('birthday')?.hasError('required')">Birthday is mandatory</mat-error>
                     <input matInput formControlName="birthday" [matDatepicker]="picker">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -33,7 +33,8 @@
             <div class="col">
                 <mat-form-field appearance="fill">
                     <mat-label>Email*</mat-label>
-                    <mat-error *ngIf="dialogForm.get('email')?.hasError('required')">Enter the email</mat-error>
+                    <mat-error *ngIf="dialogForm.get('email')?.hasError('required')">Email is mandatory</mat-error>
+                    <mat-error *ngIf="dialogForm.get('email')?.hasError('email')">Wrong format of email</mat-error>
                     <input matInput formControlName="email">
                 </mat-form-field>
             </div>
@@ -43,7 +44,7 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Position*</mat-label>
                     <input matInput formControlName="positionName" [matAutocomplete]="autoPos">
-                    <mat-error *ngIf="dialogForm.get('positionName')?.hasError('required')">Enter the position</mat-error>
+                    <mat-error *ngIf="dialogForm.get('positionName')?.hasError('required')">Position is mandatory</mat-error>
                     <mat-autocomplete #autoPos="matAutocomplete">
                         <mat-option *ngFor="let position of filteredPositions | async" [value]="position">
                             {{position}}
@@ -55,7 +56,7 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Department*</mat-label>
                     <input matInput formControlName="departmentName" [matAutocomplete]="autoDep">
-                    <mat-error *ngIf="dialogForm.get('departmentName')?.hasError('required')">Enter the department</mat-error>
+                    <mat-error *ngIf="dialogForm.get('departmentName')?.hasError('required')">Department is mandatory</mat-error>
                     <mat-autocomplete #autoDep="matAutocomplete">
                         <mat-option *ngFor="let department of filteredDepartments | async" [value]="department">
                             {{department}}

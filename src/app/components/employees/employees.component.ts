@@ -110,7 +110,7 @@ export class EmployeesComponent implements OnInit {
               },
               (error: HttpErrorResponse) => {
                 if (error.status == 400) {
-                  alert("The employee is already in the list");
+                  alert("The employee exists");
                 }
                 else {
                   alert("Something went wrong with the server");

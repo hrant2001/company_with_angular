@@ -1,30 +1,30 @@
-<h1 mat-dialog-title>{{data?.employeeId ? "Edit" : "Add"}} Employee</h1>
+<h1 mat-dialog-title>{{data?.employeeId ? ('edit' | translate) : ('add' | translate)}} {{'emp' | translate}}</h1>
 <div mat-dialog-content>
     <form [formGroup]="dialogForm">
     <div class="container">
         <div class="row">
             <div class="col">
                 <mat-form-field appearance="fill">
-                    <mat-label>First Name*</mat-label>
+                    <mat-label>{{'fname' | translate}}*</mat-label>
                     <input matInput formControlName="fname">
-                    <mat-error *ngIf="dialogForm.get('fname')?.hasError('pattern')">Enter only letters</mat-error>
-                    <mat-error *ngIf="dialogForm.get('fname')?.hasError('required')">First name is mandatory</mat-error>
+                    <mat-error *ngIf="dialogForm.get('fname')?.hasError('pattern')">{{'only_let' | translate}}</mat-error>
+                    <mat-error *ngIf="dialogForm.get('fname')?.hasError('required')">{{'fname' | translate}} {{'must' | translate}}</mat-error>
                 </mat-form-field>
             </div>
             <div class="col">
                 <mat-form-field appearance="fill">
-                    <mat-label>Last Name*</mat-label>
+                    <mat-label>{{'lname' | translate}}*</mat-label>
                     <input matInput formControlName="lname">
-                    <mat-error *ngIf="dialogForm.get('lname')?.hasError('pattern')">Enter only letters</mat-error>
-                    <mat-error *ngIf="dialogForm.get('lname')?.hasError('required')">Last name is mandatory</mat-error>
+                    <mat-error *ngIf="dialogForm.get('lname')?.hasError('pattern')">{{'only_let' | translate}}</mat-error>
+                    <mat-error *ngIf="dialogForm.get('lname')?.hasError('required')">{{'lname' | translate}} {{'must' | translate}}</mat-error>
                 </mat-form-field>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <mat-form-field appearance="fill">
-                    <mat-label>Birthday*</mat-label>
-                    <mat-error *ngIf="dialogForm.get('birthday')?.hasError('required')">Birthday is mandatory</mat-error>
+                    <mat-label>{{'bday' | translate}}*</mat-label>
+                    <mat-error *ngIf="dialogForm.get('birthday')?.hasError('required')">{{'bday' | translate}} {{'must' | translate}}</mat-error>
                     <input matInput formControlName="birthday" [matDatepicker]="picker">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -32,9 +32,9 @@
             </div>
             <div class="col">
                 <mat-form-field appearance="fill">
-                    <mat-label>Email*</mat-label>
-                    <mat-error *ngIf="dialogForm.get('email')?.hasError('required')">Email is mandatory</mat-error>
-                    <mat-error *ngIf="dialogForm.get('email')?.hasError('email')">Wrong format of email</mat-error>
+                    <mat-label>{{'email' | translate}}*</mat-label>
+                    <mat-error *ngIf="dialogForm.get('email')?.hasError('required')">{{'email' | translate}} {{'must' | translate}}</mat-error>
+                    <mat-error *ngIf="dialogForm.get('email')?.hasError('email')">{{'wrong_form' | translate}}</mat-error>
                     <input matInput formControlName="email">
                 </mat-form-field>
             </div>
@@ -42,9 +42,9 @@
         <div class="row">
             <div class="col">
                 <mat-form-field appearance="fill">
-                    <mat-label>Position*</mat-label>
+                    <mat-label>{{'pos' | translate}}*</mat-label>
                     <input matInput formControlName="positionName" [matAutocomplete]="autoPos">
-                    <mat-error *ngIf="dialogForm.get('positionName')?.hasError('required')">Position is mandatory</mat-error>
+                    <mat-error *ngIf="dialogForm.get('positionName')?.hasError('required')">{{'pos' | translate}} {{'must' | translate}}</mat-error>
                     <mat-autocomplete #autoPos="matAutocomplete">
                         <mat-option *ngFor="let position of filteredPositions | async" [value]="position">
                             {{position}}
@@ -54,9 +54,9 @@
             </div>
             <div class="col">
                 <mat-form-field appearance="fill">
-                    <mat-label>Department*</mat-label>
+                    <mat-label>{{'dep' | translate}}*</mat-label>
                     <input matInput formControlName="departmentName" [matAutocomplete]="autoDep">
-                    <mat-error *ngIf="dialogForm.get('departmentName')?.hasError('required')">Department is mandatory</mat-error>
+                    <mat-error *ngIf="dialogForm.get('departmentName')?.hasError('required')">{{'dep' | translate}} {{'must' | translate}}</mat-error>
                     <mat-autocomplete #autoDep="matAutocomplete">
                         <mat-option *ngFor="let department of filteredDepartments | async" [value]="department">
                             {{department}}
@@ -69,6 +69,6 @@
 </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-button (click)="close()">Cancel</button>
-    <button mat-button [mat-dialog-close]="data" (click)="save()" [disabled]="!dialogForm.valid">Save</button>
+    <button mat-button (click)="close()">{{'cancel' | translate}}</button>
+    <button mat-button [mat-dialog-close]="data" (click)="save()" [disabled]="!dialogForm.valid">{{'save' | translate}}</button>
 </div>

@@ -10,7 +10,7 @@
     "reset": "Reset",
     "edit": "Edit",
     "del": "Delete",
-    "add_emp": "Add Employee",
+    "add": "Add",
     "fname": "First Name",
     "lname": "Last Name",
     "bday": "Birthday",
@@ -24,5 +24,12 @@
     "by_name_dep": "Search by name or department",
     "entrance_t": "Entrance Time",
     "exit_t": "Exit Time",
-    "full_name": "Employee Full Name"
+    "full_name": "Employee Full Name",
+    "must": "is mandatory",
+    "only_let": "Enter only letters",
+    "wrong_form": "Wrong format of email",
+    "cancel": "Cancel",
+    "save": "Save",
+    "from": "from",
+    "u_sure": "Are you sure to delete the employee"
 }

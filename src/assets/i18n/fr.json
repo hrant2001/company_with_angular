@@ -9,8 +9,8 @@
     "search" : "Rechercher",
     "reset": "Réinitialiser",
     "edit" : "Modifier",
-    "del" : "Effacer",
-    "add_emp" : "Ajouter un employé",
+    "del" : "Supprimer",
+    "add": "Ajouter",
     "fname" : "Prénom",
     "lname" : "Nom de famille",
     "bday" : "Date de naissance",
@@ -24,5 +24,12 @@
     "by_name_dep" : "Recherche par nom ou par département",
     "entrance_t" : "Heure d'entrée",
     "exit_t" : "Heure de sortie",
-    "full_name" : "Nom complet de l'employé"
+    "full_name" : "Nom complet de l'employé",
+    "must": "est obligatoire",
+    "only_let": "Entrer uniquement des lettres",
+    "wrong_form": "Mauvais format d'email",
+    "cancel": "Annuler",
+    "save": "Sauvegarder",
+    "from": "de",
+    "u_sure": "Êtes-vous sûr de supprimer l'employé"
 }

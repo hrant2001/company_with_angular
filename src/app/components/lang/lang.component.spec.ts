@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecordsTabsComponent } from './records-tabs.component';
+import { LangComponent } from './lang.component';
 
-describe('RecordsTabsComponent', () => {
-  let component: RecordsTabsComponent;
-  let fixture: ComponentFixture<RecordsTabsComponent>;
+describe('LangComponent', () => {
+  let component: LangComponent;
+  let fixture: ComponentFixture<LangComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RecordsTabsComponent ]
+      declarations: [ LangComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RecordsTabsComponent);
+    fixture = TestBed.createComponent(LangComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

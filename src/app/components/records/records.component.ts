@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { from } from 'rxjs';
 import { Record } from 'src/app/core/interfaces/record';
 import { RecordService } from 'src/app/core/services/record.service';
 

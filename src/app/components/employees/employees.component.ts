@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEditDialogComponent } from '../add-edit-dialog/add-edit-dialog.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { TranslateConfigService } from 'src/app/core/services/translate-config.service';
 
 @Component({
   selector: 'app-employees',
@@ -21,7 +22,7 @@ export class EmployeesComponent implements OnInit {
 
   public dataSource: any;
 
-  constructor(private employeeService: EmployeeService, public dialog: MatDialog) {
+  constructor(private translateConfigurationService: TranslateConfigService, private employeeService: EmployeeService, public dialog: MatDialog) {
     this.employees = [];
     this.filter = '';
   }

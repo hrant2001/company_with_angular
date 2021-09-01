@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-9"></div>
         <div class="col-3">
-            <label for="langs" translate>lang</label>
+            <label for="langs">{{'lang' | translate}}</label>
             <select id="langs" class="custom-select" (change)="changeLang($any($event.target).value)">
                 <option value="en">English</option>
                 <option value="fr">Français</option>

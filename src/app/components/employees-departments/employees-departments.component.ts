@@ -1,5 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Employee } from 'src/app/core/interfaces/employee';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 import * as XLSX from 'xlsx'; 
@@ -11,26 +10,14 @@ import * as XLSX from 'xlsx';
 })
 export class EmployeesDepartmentsComponent implements OnInit {
 
-  public employees: Employee[];
-  public fileName= 'employees_by_departments.xlsx';  
+  @Input() public employeesDep: Employee[] = [];
+  public fileName = 'employees_by_departments.xlsx';  
 
   constructor(private employeeService: EmployeeService) { 
-    this.employees = [];
   }
 
   ngOnInit() {
-    this.getEmployees();
-  }
-
-  public getEmployees(): void {
-    this.employeeService.getEmployees().subscribe(
-      (response: Employee[]) => {
-        this.employees = response.sort((e1, e2) => e1.position.positionId - e2.position.positionId);
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
+    
   }
 
   public exportexcel(): void 

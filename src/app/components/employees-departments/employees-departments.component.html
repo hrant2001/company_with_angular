@@ -1,9 +1,9 @@
 <h2 style="margin-bottom: 25px; margin-top: 10px;"><strong>{{'list_by_deps' | translate}}</strong></h2>
 <h3><a href="#" (click)="exportexcel()" style="float: right; margin-top: 10px;">{{'excel_msg' | translate}}</a></h3>
 <div class="container">
-    <table id="deps" >
-        <div *ngFor="let employee of employees; let i = index">
-            <tr *ngIf="i == 0 || employees[i].department.name != employees[i - 1].department.name">       
+    <table id="deps" #deps>
+        <div *ngFor="let employee of employeesDep; let i = index">
+            <tr *ngIf="i == 0 || employeesDep[i].department.name != employeesDep[i - 1].department.name">       
                 <td><strong> {{employee.department.name}} department </strong></td>
             </tr>
             <tr>

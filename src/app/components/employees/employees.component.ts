@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Employee } from '../../core/interfaces/employee';
 import { EmployeeService } from '../../core/services/employee.service';
@@ -6,7 +6,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEditDialogComponent } from '../add-edit-dialog/add-edit-dialog.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { TranslateConfigService } from 'src/app/core/services/translate-config.service';
 
 @Component({
   selector: 'app-employees',
@@ -14,37 +13,32 @@ import { TranslateConfigService } from 'src/app/core/services/translate-config.s
   styleUrls: ['./employees.component.css']
 })
 
-export class EmployeesComponent implements OnInit {
+export class EmployeesComponent implements OnInit, OnChanges {
+
+  @Input() public employeesChild: Employee[] = [];
+  @Output() public refreshEmployees: EventEmitter<any> = new EventEmitter();
 
   public displayedColumns: string[] = ["employeeNumber", "fname", "lname", "birthday", "email", "position", "department", "actions"];
-  public employees: Employee[];
-  public filter: string;
+  public filter: string = '';
 
   public dataSource: any;
 
-  constructor(private translateConfigurationService: TranslateConfigService, private employeeService: EmployeeService, public dialog: MatDialog) {
-    this.employees = [];
-    this.filter = '';
+  constructor(public dialog: MatDialog,
+    private employeeService: EmployeeService) {
   }
 
-  ngOnInit(): void {
-    this.getEmployees();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.employeesChild.currentValue.length) {
+      this.dataSource = new MatTableDataSource(changes.employeesChild.currentValue);
+    }
   }
 
-  public getEmployees(): void {
-    this.employeeService.getEmployees().subscribe(
-      (response: Employee[]) => {
-        this.employees = response;
-        this.dataSource = new MatTableDataSource(response);
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
+  ngOnInit() {
+
   }
 
   public deleteEmployee(emp: Employee): void {
-    const selectedEmployee = {...emp};
+    const selectedEmployee = { ...emp };
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '610px',
       height: '200px',
@@ -56,16 +50,16 @@ export class EmployeesComponent implements OnInit {
       if (result) {
         this.employeeService.deleteEmployee(emp.employeeId).subscribe(() => {
           console.log("Deleted successfully");
-          this.getEmployees();
+          this.refreshEmployees.emit();
         },
-        (error: HttpErrorResponse) => {
-          if (error.status == 404) {
-            alert("The employee was not found to be deleted")
+          (error: HttpErrorResponse) => {
+            if (error.status == 404) {
+              alert("The employee was not found to be deleted")
+            }
+            else {
+              alert("Something went wrong with the server");
+            }
           }
-          else {
-            alert("Something went wrong with the server");
-          }
-        }
         );
       }
     });
@@ -77,49 +71,51 @@ export class EmployeesComponent implements OnInit {
     const dialogRef = this.dialog.open(AddEditDialogComponent, {
       width: '650px',
       height: '400px',
-      data: selectedEmployee ? emp : { employeeId: 0, fname: '', lname: '', birthday: '', email: '',  
-      position: {positionId: 0, name: '', shortName:''}, department: {departmentId: 0, name: ''}, enabled:true}
+      data: selectedEmployee ? emp : {
+        employeeId: 0, fname: '', lname: '', birthday: '', email: '',
+        position: { positionId: 0, name: '', shortName: '' }, department: { departmentId: 0, name: '' }, enabled: true
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The edit add dialog was closed', result);
       if (result) {
-          if (result.employeeId) {
-            this.employeeService.updateEmployee(result).subscribe(
-              (response: Employee) => {
-                console.log("Updated successfully", response);
-                this.getEmployees();
-              },
-              (error: HttpErrorResponse) => {
-                if (error.status == 400) {
-                  alert("The employee is not valid");
-                }
-                else if (error.status == 404) {
-                  alert("The employee was not found to be updated");
-                }
-                else {
-                  alert("Something went wrong with the server");
-                }
+        if (result.employeeId) {
+          this.employeeService.updateEmployee(result).subscribe(
+            (response: Employee) => {
+              console.log("Updated successfully", response);
+              this.refreshEmployees.emit();
+            },
+            (error: HttpErrorResponse) => {
+              if (error.status == 400) {
+                alert("The employee is not valid");
               }
-            );
-          }
-          else {
-            this.employeeService.addEmployee(result).subscribe(
-              (response: Employee) => {
-                console.log("Added successfully", response);
-                this.getEmployees();
-              },
-              (error: HttpErrorResponse) => {
-                if (error.status == 400) {
-                  alert("The employee exists");
-                }
-                else {
-                  alert("Something went wrong with the server");
-                }
+              else if (error.status == 404) {
+                alert("The employee was not found to be updated");
               }
-            );
-          }
+              else {
+                alert("Something went wrong with the server");
+              }
+            }
+          );
         }
+        else {
+          this.employeeService.addEmployee(result).subscribe(
+            (response: Employee) => {
+              console.log("Added successfully", response);
+              this.refreshEmployees.emit();
+            },
+            (error: HttpErrorResponse) => {
+              if (error.status == 400) {
+                alert("The employee exists");
+              }
+              else {
+                alert("Something went wrong with the server");
+              }
+            }
+          );
+        }
+      }
     });
   }
 

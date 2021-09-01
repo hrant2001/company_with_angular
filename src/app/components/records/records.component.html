@@ -7,10 +7,17 @@
         <button class="mr-3" mat-raised-button [ngStyle]="{'background-color':'Blue', 'color':'White'}" (click)="showMonth()" style="float:left; margin-right: 50px;">{{'month' | translate}}
         </button>
     </div>    
-    <mat-form-field appearance="fill" style="width: 290px; float:left; margin-right:30px;">
-        <input matInput placeholder="{{'by_name_dep' | translate}}">
-    </mat-form-field>
-
+    <div style="width: 270px; float:left;">
+        <mat-form-field appearance="standard">
+          <mat-label>{{'by_name_dep' | translate}}</mat-label>
+          <input matInput (keyup)="applyFilter($event)" #input [(ngModel)]="filter">
+        </mat-form-field>
+    </div>
+    <div class="mt-4" style="float:left; margin-right: 50px;">
+        <button class="mr-3" mat-raised-button [ngStyle]="{'background-color':'Red', 'color':'White'}"
+          (click)="resetFilter()">{{'reset' | translate}}
+        </button>
+      </div>
     <mat-button-toggle-group name="searchOption">
         <mat-button-toggle value="employee">{{'emp' | translate}}</mat-button-toggle>
         <mat-button-toggle value="department">{{'dep' | translate}}</mat-button-toggle>

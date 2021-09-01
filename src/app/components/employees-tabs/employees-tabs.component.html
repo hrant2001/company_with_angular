@@ -1,8 +1,8 @@
 <mat-tab-group animationDuration="0ms" class="mt-5">
     <mat-tab label="{{'all' | translate}}">
-        <app-employees></app-employees>
+        <app-employees [employeesChild]="employees" (refreshEmployees)="getEmployees()"></app-employees>
     </mat-tab>
     <mat-tab label="{{'deps' | translate}}">
-        <app-employees-departments></app-employees-departments>
+        <app-employees-departments [employeesDep]="employeesByDep"></app-employees-departments>
     </mat-tab>
 </mat-tab-group>

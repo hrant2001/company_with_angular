@@ -3,7 +3,6 @@
     <mat-label>{{'search' | translate}}</mat-label>
     <input matInput (keyup)="applyFilter($event)" #input [(ngModel)]="filter">
   </mat-form-field>
-
 </div>
 
 <div class="mt-4" style="float:left; margin-right: 200px;">
@@ -17,7 +16,7 @@
     (click)="addEditEmployee()">{{'add' | translate}} {{'emp' | translate}}</button>
 </div>
 
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8" *ngIf="employeesChild?.length">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100" id="emp-table">
     <ng-container matColumnDef="employeeNumber">
       <th mat-header-cell *matHeaderCellDef> No. </th>

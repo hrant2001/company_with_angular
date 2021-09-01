@@ -13,6 +13,8 @@ export class EmployeeService {
 
   private apiServerUrl = environment.apiBaseUrl;
 
+  public employees: Employee[] = [];
+  
   constructor(private http: HttpClient) { }
   
   public getEmployees() : Observable<Employee[]> {

@@ -19,8 +19,7 @@
     "actions": "Actions",
     "list_by_deps": "List of employees by departments",
     "excel_msg": "Get the Excel version",
-    "day": "Day",
-    "month": "Month",
+    "to": "to",
     "by_name_dep": "Search by name or department",
     "entrance_t": "Entrance Time",
     "exit_t": "Exit Time",
@@ -31,5 +30,9 @@
     "cancel": "Cancel",
     "save": "Save",
     "from": "from",
-    "u_sure": "Are you sure to delete the employee"
+    "u_sure": "Are you sure to delete the employee",
+    "username": "Username",
+    "password": "Password",
+    "logIn": "Log In",
+    "welcome": "Welcome to our company app"
 }

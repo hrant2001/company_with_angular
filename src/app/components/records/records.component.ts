@@ -12,16 +12,17 @@ import { RecordService } from 'src/app/core/services/record.service';
 export class RecordsComponent implements OnInit {
 
   public displayedColumns: string[] = ["recordNumber", "entranceTime", "exitTime", "employeeFullName", "department"];
-  public records: Record[];
+  public records: Record[] =[];
 
-  public filter: string;
-  public addedDays: boolean = false;
-  public addedMonths: boolean = false;
+  public from: string = '';
+  public to: string = '';
+  public empOrDep: string = '';
+  public isEmp: string = 'employee';
+  public addedFrom: boolean = false;
+  public addedTo: boolean = false;
 
   public dataSource: any;
   constructor(private recordService: RecordService) {
-    this.records = [];
-    this.filter = '';
   }
 
   ngOnInit(): void {
@@ -40,59 +41,21 @@ export class RecordsComponent implements OnInit {
     );
   }
 
-  public applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   public resetFilter() {
-    this.dataSource.filter = '';
-    this.filter = '';
+    this.empOrDep = '';    
   }
 
-  public showDay() {
-    if (!this.addedDays) {
-      const fromDay = document.createElement('input');
-      fromDay.type = 'number';
-      fromDay.setAttribute("min", "1");
-      fromDay.setAttribute("max", "31");
-
-      const toDay = document.createElement('input');
-      toDay.type = 'number';
-      toDay.setAttribute("min", "1");
-      toDay.setAttribute("max", "31");
-
-      const br = document.createElement("br");
-      const dayDiv = document.getElementById("dayDiv");
-
-      dayDiv?.append(fromDay);
-      dayDiv?.append(br);
-      dayDiv?.append(toDay);
-
-      this.addedDays = true;
-    }
+  public shouldShowFrom() {
+    this.addedFrom = !this.addedFrom;
   }
 
-  public showMonth() {
-    if (!this.addedMonths) {
-      const fromMonth = document.createElement('input');
-      fromMonth.type = 'month';
-
-      const toMonth = document.createElement('input');
-      toMonth.type = 'month';
-
-      const br = document.createElement("br");
-      const monthDiv = document.getElementById("monthDiv");
-
-      monthDiv?.append(fromMonth);
-      monthDiv?.append(br);
-      monthDiv?.append(toMonth);
-
-      this.addedMonths = true;
-    }
+  public shouldShowTo() {
+    this.addedTo = !this.addedTo;
   }
 
   public search() {
-
+    // //this.recordService.getRecordsByCriteria(); //provide criteria from hmtl
+    // console.log("You searched for ", this.from, this.to, this.empOrDep, this.isEmp);
+    // this.recordService.getRecordsByCriteria(this.from, this.to, this.empOrDep, this.isEmp === "employee"); //provide criteria from hmtl
   }
 }

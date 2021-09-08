@@ -7,7 +7,7 @@
     "deps" : "Départements",
     "lang" : "Choisissez la langue",
     "search" : "Rechercher",
-    "reset": "Réinitialiser",
+    "reset": "Reset",
     "edit" : "Modifier",
     "del" : "Supprimer",
     "add": "Ajouter",
@@ -19,8 +19,7 @@
     "actions" : "Actions",
     "list_by_deps" : "Liste des employés par départements",
     "excel_msg" : "Obtenir la version Excel",
-    "day" : "Jour",
-    "month" : "Mois",
+    "to" : "à",
     "by_name_dep" : "Recherche par nom ou par département",
     "entrance_t" : "Heure d'entrée",
     "exit_t" : "Heure de sortie",
@@ -31,5 +30,9 @@
     "cancel": "Annuler",
     "save": "Sauvegarder",
     "from": "de",
-    "u_sure": "Êtes-vous sûr de supprimer l'employé"
+    "u_sure": "Êtes-vous sûr de supprimer l'employé",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "logIn": "Log In",
+    "welcome": "Bienvenue sur notre application d'entreprise"
 }

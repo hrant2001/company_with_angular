@@ -19,6 +19,7 @@ import { EmployeesDepartmentsComponent } from './components/employees-department
 import { LangComponent } from './components/lang/lang.component';
 import { TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -34,7 +35,8 @@ export function rootLoaderFactory(http: HttpClient) {
     DeleteDialogComponent,
     RecordsComponent,
     EmployeesDepartmentsComponent,
-    LangComponent
+    LangComponent,
+    LoginDialogComponent,
   ],
   imports: [
     BrowserModule,

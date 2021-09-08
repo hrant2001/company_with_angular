@@ -111,6 +111,8 @@ export class EmployeesComponent implements OnInit, OnChanges {
               }
               else {
                 alert("Something went wrong with the server");
+                console.log("error", error.message);
+                
               }
             }
           );

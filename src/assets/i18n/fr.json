@@ -33,6 +33,7 @@
     "u_sure": "Êtes-vous sûr de supprimer l'employé",
     "username": "Nom d'utilisateur",
     "password": "Mot de passe",
-    "logIn": "Log In",
+    "logIn": "Se connecter",
+    "logOut": "Se déconnecter",
     "welcome": "Bienvenue sur notre application d'entreprise"
 }

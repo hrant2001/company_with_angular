@@ -2,7 +2,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployeeService } from './core/services/employee.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -19,7 +18,10 @@ import { EmployeesDepartmentsComponent } from './components/employees-department
 import { LangComponent } from './components/lang/lang.component';
 import { TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { HeaderComponent } from './components/header/header.component';
+import { AppRoutingModule } from './app-routing.module';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -36,8 +38,10 @@ export function rootLoaderFactory(http: HttpClient) {
     RecordsComponent,
     EmployeesDepartmentsComponent,
     LangComponent,
-    LoginDialogComponent,
-  ],
+    LoginComponent,
+    LogoutComponent,
+    HeaderComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

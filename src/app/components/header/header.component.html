@@ -1,0 +1,6 @@
+<header>
+  <app-lang></app-lang>
+  <div *ngIf="loginService.isUserLoggedIn()">
+    <button routerLink="/logout" class="btn btn-success" style="font-size: 15px; margin-left: 15px;">{{'logOut' | translate}}</button>
+  </div>  
+</header>

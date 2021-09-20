@@ -24,17 +24,17 @@
     </ng-container>
 
     <ng-container matColumnDef="fname">
-      <th mat-header-cell *matHeaderCellDef>{{'fname' |translate}}</th>
+      <th mat-header-cell *matHeaderCellDef>{{'fname' | translate}}</th>
       <td mat-cell *matCellDef="let employee"> {{employee.fname}} </td>
     </ng-container>
 
     <ng-container matColumnDef="lname">
-      <th mat-header-cell *matHeaderCellDef>{{'lname' |translate}}</th>
+      <th mat-header-cell *matHeaderCellDef>{{'lname' | translate}}</th>
       <td mat-cell *matCellDef="let employee"> {{employee.lname}} </td>
     </ng-container>
 
     <ng-container matColumnDef="birthday">
-      <th mat-header-cell *matHeaderCellDef>{{ 'bday' |translate }}</th>
+      <th mat-header-cell *matHeaderCellDef>{{ 'bday' | translate }}</th>
       <td mat-cell *matCellDef="let employee"> {{employee.birthday | date:'yyyy-MM-dd'}} </td>
     </ng-container>
 

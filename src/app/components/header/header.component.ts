@@ -10,13 +10,10 @@ import { AuthenticationService } from 'src/app/core/services/authentication.serv
 })
 export class HeaderComponent implements OnInit {
 
-  public user = {} as UserResponse;
-  public alo = 'asdasd';
   constructor(public loginService: AuthenticationService) {
    }
 
   ngOnInit() {
-    this.user = this.loginService.foundUser;
   }
 
 }

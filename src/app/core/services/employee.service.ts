@@ -18,31 +18,30 @@ export class EmployeeService {
   constructor(private http: HttpClient) { }
   
   public getEmployees() : Observable<Employee[]> {
-    //.set('Access-Control-Allow-Origin', '*')
-    return this.http.get<Employee[]>(`${this.apiServerUrl}/employees`, {headers: new HttpHeaders().set(`Authorization`, `Bearer_${sessionStorage.getItem('token')}`)});
+    return this.http.get<Employee[]>(`${this.apiServerUrl}/employees`);
   }
 
   public getEmployeeById(id: number) : Observable<Employee> {
-    return this.http.get<Employee>(`${this.apiServerUrl}/employees/find/${id}`, {headers: new HttpHeaders().set(`Authorization`, `Bearer_${sessionStorage.getItem('token')}`)});
+    return this.http.get<Employee>(`${this.apiServerUrl}/employees/find/${id}`);
   }
 
   public addEmployee(employee: Employee) : Observable<Employee> {
-    return this.http.post<Employee>(`${this.apiServerUrl}/employees/add`, employee, {headers: new HttpHeaders().set(`Authorization`, `Bearer_${sessionStorage.getItem('token')}`)});
+    return this.http.post<Employee>(`${this.apiServerUrl}/employees/add`, employee);
   }
 
   public updateEmployee(employee: Employee) : Observable<Employee> {
-    return this.http.put<Employee>(`${this.apiServerUrl}/employees/update`, employee, {headers: new HttpHeaders().set(`Authorization`, `Bearer_${sessionStorage.getItem('token')}`)});
+    return this.http.put<Employee>(`${this.apiServerUrl}/employees/update`, employee);
   }
 
   public deleteEmployee(id: number) : Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/employees/delete/${id}`, {headers: new HttpHeaders().set(`Authorization`, `Bearer_${sessionStorage.getItem('token')}`)});
+    return this.http.delete<void>(`${this.apiServerUrl}/employees/delete/${id}`);
   }
 
   public getPositions() : Observable<Position[]> {
-    return this.http.get<Position[]>(`${this.apiServerUrl}/positions`, {headers: new HttpHeaders().set(`Authorization`, `Bearer_${sessionStorage.getItem('token')}`)});
+    return this.http.get<Position[]>(`${this.apiServerUrl}/positions`);
   }
 
   public getDepartments() : Observable<Department[]> {
-    return this.http.get<Department[]>(`${this.apiServerUrl}/departments`, {headers: new HttpHeaders().set(`Authorization`, `Bearer_${sessionStorage.getItem('token')}`)});
+    return this.http.get<Department[]>(`${this.apiServerUrl}/departments`);
   }
 }

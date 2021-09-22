@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  checkLogin() {
-    if (this.loginService.authenticate({ username: this.username, password: this.password} as UserRequest)) {
+  async checkLogin() {
+    if (await this.loginService.authenticate({ username: this.username, password: this.password } as UserRequest)) {
       this.router.navigate([''])
       console.log("REDIRECTED");
       this.validLogin = true

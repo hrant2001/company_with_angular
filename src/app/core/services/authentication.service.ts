@@ -1,8 +1,9 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { UserRequest } from '../interfaces/user-request';
 import { UserResponse } from '../interfaces/user-response';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,22 @@ export class AuthenticationService {
   public foundUser = {} as UserResponse;
 
   private isValidUser = false;
-  constructor(private userService: UserService) { }
 
-  public getUser(user: UserRequest): void {
-    this.userService.getUserAuthorization(user).subscribe(
+  private apiServerUrl = environment.apiBaseUrl;
+  
+  private token: string | null = null;
+
+  constructor(private http: HttpClient) { }
+
+  public getAuthorizedUser(user: UserRequest): Observable<UserResponse> {    
+      return this.http.post<UserResponse>(`${this.apiServerUrl}/auth/login`, user);
+  }
+
+  async authenticate(user: UserRequest) {
+     await this.getAuthorizedUser(user).toPromise().then(
       (response: UserResponse) => {
         this.foundUser = response;
+        console.log(this.foundUser);
       },
       (error: HttpErrorResponse) => {
         if (error.status == 403) {
@@ -27,10 +38,7 @@ export class AuthenticationService {
           alert("Something went wrong with the server " + error.message);
         }
       });
-  }
 
-  authenticate(user: UserRequest) {
-    this.getUser(user);
     console.log(this.foundUser);
 
     if (this.foundUser.token) {
@@ -50,6 +58,6 @@ export class AuthenticationService {
   }
 
   logOut() {
-    sessionStorage.removeItem('token')
+    sessionStorage.removeItem('token');
   }
 }

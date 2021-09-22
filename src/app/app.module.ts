@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -22,6 +22,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing.module';
+import { TokenInterceptor } from './core/services/token-interceptor.service';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -59,7 +60,11 @@ export function rootLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [EmployeeService],
+  providers: [EmployeeService, {
+    provide: HTTP_INTERCEPTORS,
+    multi: true,
+    useClass: TokenInterceptor
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

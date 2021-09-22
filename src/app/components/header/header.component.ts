@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserRequest } from 'src/app/core/interfaces/user-request';
 import { UserResponse } from 'src/app/core/interfaces/user-response';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
@@ -10,8 +9,14 @@ import { AuthenticationService } from 'src/app/core/services/authentication.serv
 })
 export class HeaderComponent implements OnInit {
 
+  public static user = {} as UserResponse;
+
   constructor(public loginService: AuthenticationService) {
-   }
+  }
+
+  get getUserFullName() {
+    return HeaderComponent.user.employeeDto?.fname + " " + HeaderComponent.user.employeeDto?.lname;
+  }
 
   ngOnInit() {
   }

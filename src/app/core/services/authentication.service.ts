@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 import { environment } from 'src/environments/environment';
 import { UserRequest } from '../interfaces/user-request';
 import { UserResponse } from '../interfaces/user-response';
@@ -16,8 +17,6 @@ export class AuthenticationService {
 
   private apiServerUrl = environment.apiBaseUrl;
   
-  private token: string | null = null;
-
   constructor(private http: HttpClient) { }
 
   public getAuthorizedUser(user: UserRequest): Observable<UserResponse> {    
@@ -28,6 +27,9 @@ export class AuthenticationService {
      await this.getAuthorizedUser(user).toPromise().then(
       (response: UserResponse) => {
         this.foundUser = response;
+        console.log("IS Employee or not?", this.foundUser);
+        
+        HeaderComponent.user = this.foundUser;
         console.log(this.foundUser);
       },
       (error: HttpErrorResponse) => {
@@ -58,6 +60,7 @@ export class AuthenticationService {
   }
 
   logOut() {
+    this.foundUser = {} as UserResponse;
     sessionStorage.removeItem('token');
   }
 }

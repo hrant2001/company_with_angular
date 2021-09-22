@@ -1,9 +1,13 @@
-<div class="container">
-    <div  style="font-size: 15px;">
-      {{'username' | translate}} : <input type="text" name="username" [(ngModel)]="username">
-      {{'password' | translate}} : <input type="password" name="password" [(ngModel)]="password">
-    </div>
+<div  style="font-size: 15px;">
+  <div class="col">
+    <input type="text" name="username" [(ngModel)]="username" placeholder="{{'username' | translate}}*" style="margin-bottom: 20px;">
+  </div>
+  <div class="col">
+    <input type="password" name="password" [(ngModel)]="password" placeholder="{{'password' | translate}}*">
+  </div>
+  <div class="col">
     <button (click)=checkLogin() class="btn btn-success" style="font-size: 15px; margin-top: 30px;">
       {{'logIn' | translate}}
     </button>
+  </div>
 </div>

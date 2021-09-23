@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>{{'logOut' | translate}}</h1>
+<div mat-dialog-content>
+    <h3>{{'u_sure_logout' | translate}}, <strong>{{data.employeeDto.fname}} {{data.employeeDto.lname}}</strong>?</h3>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">{{'cancel' | translate}}</button>
+    <button mat-button routerLink="/logout" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>

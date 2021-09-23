@@ -23,6 +23,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TokenInterceptor } from './core/services/token-interceptor.service';
+import { LogoutDialogComponent } from './components/logout-dialog/logout-dialog.component';
 
 export function rootLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -41,7 +42,8 @@ export function rootLoaderFactory(http: HttpClient) {
     LangComponent,
     LoginComponent,
     LogoutComponent,
-    HeaderComponent
+    HeaderComponent,
+    LogoutDialogComponent
     ],
   imports: [
     BrowserModule,

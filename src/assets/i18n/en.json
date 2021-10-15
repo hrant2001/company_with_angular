@@ -36,5 +36,6 @@
     "password": "Password",
     "logIn": "Log In",
     "logOut": "Log Out",
-    "welcome": "Welcome"
+    "welcome": "Welcome",
+    "day": "Day"
 }

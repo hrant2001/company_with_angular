@@ -43,17 +43,14 @@ export class RecordService {
     return this.http.get<Department[]>(`${this.apiServerUrl}/departments`);
   }
 
-  // public getRecordsByCriteria(from: string, to: string, empOrDep: string, isEmp: boolean): Observable<Record[]> { //provice correct parametrs
-  //   if (!from) {
-  //     from = "null";
-  //   }
-  //   if (!to) {
-  //     to = "null";
-  //   }
-  //   if (!empOrDep) {
-  //     empOrDep = "null";
-  //   }
-  //   console.log("In service", from, to);
-  //     return this.http.get<Record[]>(`${this.apiServerUrl}/records/by_criteria/${from}/${to}/${empOrDep}/${isEmp}`);
-  // }
+  public getRecordsByCriteria(isEmp: boolean, empOrDep: string, day: string): Observable<Record[]> { //provide correct parametrs
+    var searchPath = `/find-by-criteria?is_employee=${isEmp}`;
+    if (empOrDep) {
+      searchPath += `&criteria=${empOrDep}`
+    }
+    if (day) {
+      searchPath += `&date=${day}`
+    }
+    return this.http.get<Record[]>(`${this.apiServerUrl}/records` + searchPath);
+  }
 }

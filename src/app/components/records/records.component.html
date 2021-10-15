@@ -1,20 +1,11 @@
 <div style="margin-bottom: 30px; margin-top: 20px;">
     <div id="d" style="float:left;margin-top: 20px;">
         <button class="mr-3 mb-3" id="dayId" mat-raised-button [ngStyle]="{'background-color':'Blue', 'color':'White'}"
-            (click)="shouldShowFrom()">{{'from' | translate}}
+            (click)="shouldShowDay()">{{'day' | translate}}
         </button>
         <br>
-        <div *ngIf="addedFrom">
-            <input id="fromDay" type="date" [(ngModel)]="from">
-        </div>
-    </div>
-    <div id="m" style="float:left;margin-top: 20px;">
-        <button class="mr-3 mb-3" id="monthId" mat-raised-button (click)="shouldShowTo()"
-            style="background-color:Blue;color:White">{{'to' | translate}}
-        </button>
-        <br>
-        <div *ngIf="addedTo">
-            <input id="fromMonth" type="date" [(ngModel)]="to">
+        <div *ngIf="addedDay">
+            <input id="day" type="date" [(ngModel)]="day" style="position: fixed;">
         </div>
     </div>
     <div style="width: 270px; float:left; margin-left: 70px;">

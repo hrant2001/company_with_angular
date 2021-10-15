@@ -12,8 +12,6 @@ export class TokenInterceptor implements HttpInterceptor{
       if (req.url === "http://localhost:8080/auth/login") {
             return next.handle(req);
         }
-
-        console.log("In TOken interceptor", sessionStorage.getItem('token'));
         
         req = req.clone({
             setHeaders: {

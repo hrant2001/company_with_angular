@@ -22,19 +22,19 @@ export class EmployeeService {
   }
 
   public getEmployeeById(id: number) : Observable<Employee> {
-    return this.http.get<Employee>(`${this.apiServerUrl}/employees/find/${id}`);
+    return this.http.get<Employee>(`${this.apiServerUrl}/employees/${id}`);
   }
 
   public addEmployee(employee: Employee) : Observable<Employee> {
-    return this.http.post<Employee>(`${this.apiServerUrl}/employees/add`, employee);
+    return this.http.post<Employee>(`${this.apiServerUrl}/employees`, employee);
   }
 
   public updateEmployee(employee: Employee) : Observable<Employee> {
-    return this.http.put<Employee>(`${this.apiServerUrl}/employees/update`, employee);
+    return this.http.put<Employee>(`${this.apiServerUrl}/employees`, employee);
   }
 
   public deleteEmployee(id: number) : Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/employees/delete/${id}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/employees/${id}`);
   }
 
   public getPositions() : Observable<Position[]> {

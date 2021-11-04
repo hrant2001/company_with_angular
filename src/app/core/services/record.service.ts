@@ -20,19 +20,19 @@ export class RecordService {
   }
 
   public getRecordById(id: number): Observable<Record> {
-    return this.http.get<Record>(`${this.apiServerUrl}/records/find/${id}`);
+    return this.http.get<Record>(`${this.apiServerUrl}/records/${id}`);
   }
 
   public addRecord(employee: Record): Observable<Record> {
-    return this.http.post<Record>(`${this.apiServerUrl}/records/add`, employee);
+    return this.http.post<Record>(`${this.apiServerUrl}/records`, employee);
   }
 
   public updateRecord(employee: Record): Observable<Record> {
-    return this.http.put<Record>(`${this.apiServerUrl}/records/update`, employee);
+    return this.http.put<Record>(`${this.apiServerUrl}/records`, employee);
   }
 
   public deleteRecord(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/records/delete/${id}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/records/${id}`);
   }
 
   public getPositions(): Observable<Position[]> {

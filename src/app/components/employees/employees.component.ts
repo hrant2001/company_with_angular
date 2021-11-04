@@ -88,7 +88,7 @@ export class EmployeesComponent implements OnInit, OnChanges {
             },
             (error: HttpErrorResponse) => {
               if (error.status == 400) {
-                alert("The employee is not valid");
+                alert("The employee is not valid or already exists");
               }
               else if (error.status == 404) {
                 alert("The employee was not found to be updated");
@@ -107,7 +107,7 @@ export class EmployeesComponent implements OnInit, OnChanges {
             },
             (error: HttpErrorResponse) => {
               if (error.status == 400) {
-                alert("The employee exists");
+                alert("The employee is not valid or already exists");
               }
               else {
                 alert("Something went wrong with the server");
